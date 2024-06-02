@@ -1,14 +1,22 @@
-export default function SearchBox({ value, onFilter }) {
-  return (
-    <label htmlFor="form">
-      <p>Find contacts by name</p>
+import { useSelector, useDispatch } from "react-redux";
+import { changeFilter, selectNameFilter } from "../../redux/filtersSlice";
 
+const SearchBox = () => {
+  const dispatch = useDispatch();
+
+  const filter = useSelector(selectNameFilter);
+
+  return (
+    <div>
+      <p >Find contacts by name</p>
       <input
+       
         type="text"
-        id="form"
-        value={value}
-        onChange={(e) => onFilter(e.target.value)}
+        value={filter}
+        onChange={(e) => dispatch(changeFilter(e.target.value))}
       />
-    </label>
+    </div>
   );
-}
+};
+
+export default SearchBox;
